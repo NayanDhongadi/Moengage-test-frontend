@@ -6,7 +6,23 @@ import Contact from '../src/Components/Contact'
 import Services from '../src/Components/Services'
 
 
+
 function App() {
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      
+      navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/serviceworker.js`)
+      
+        .then((registration) => {
+          console.log("process.env.PUBLIC_URL",process.env.PUBLIC_URL);
+          console.log('ServiceWorker registration successful with scope:', registration.scope);
+        })
+        .catch((error) => {
+          console.log('ServiceWorker registration failed:', error);
+        });
+    });
+  }
   return (
    <>
 <Router>

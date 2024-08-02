@@ -1,7 +1,13 @@
-// service-worker.js
+importScripts("https://cdn.moengage.com/release/dc_2/serviceworker_cdn.min.latest.js");
 
-// Import MoEngage service worker script
-importScripts('https://cdn.moengage.com/serviceworker_cdn.min.latest.js');
-
-// Initialize MoEngage service worker
-moengage.registerWorker(self, 'QPRMH0VQMWX3XZM7NU3VC8RD_DEBUG'); // Replace 'YOUR_APP_ID' with your actual MoEngage App ID
+self.addEventListener('install', function(event) {
+    console.log('Service Worker installing.');
+  });
+  
+  self.addEventListener('activate', function(event) {
+    console.log('Service Worker activating.');
+  });
+  
+  self.addEventListener('fetch', function(event) {
+    console.log('Fetching:', event.request.url);
+  });
