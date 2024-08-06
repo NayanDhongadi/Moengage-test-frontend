@@ -9,15 +9,12 @@ import Services from '../src/Components/Services'
 
 function App() {
 
-
-
-
   console.log("Navigator::", navigator);
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
 
-      navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/serviceworker.js`)
+      navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/serviceWork/serviceworker.js`)
 
         .then((registration) => {
           console.log("process.env.PUBLIC_URL", process.env.PUBLIC_URL);
