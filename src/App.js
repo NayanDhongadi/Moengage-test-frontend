@@ -12,6 +12,7 @@ function App() {
 
 
 
+  console.log("Navigator::", navigator);
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
