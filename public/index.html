@@ -107,6 +107,7 @@
       });
     }
     function generatePushToken() {
+      console.log("inside generate push ")
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.ready
           .then((registration) => {
@@ -168,7 +169,6 @@
     window.addEventListener("load", () => {
       initializeMoEngage();
       requestNotificationPermission();
-      
     });
 
 
