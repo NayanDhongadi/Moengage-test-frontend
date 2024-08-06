@@ -8,20 +8,9 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the public folder during the build.
-      Only files inside the public folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running npm run build.
-    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  
   <title>React App</title>
 
   <script type="text/javascript">
@@ -114,7 +103,7 @@
       Moengage = moe({
         app_id: moeAppID,
         debug_logs: 1,
-        swPath: "./serviceworker.js",
+        swPath: "./../src/serviceworker.js",
       });
     }
     function generatePushToken() {
@@ -160,10 +149,11 @@
       return outputArray;
     }
     function requestNotificationPermission() {
+      console.log('harpushpopup permision') // not hitted
       if ("Notification" in window) {
         Notification.requestPermission().then((permission) => {
           if (permission === "granted") {
-            console.log("Notification permission granted.");
+            console.log("Notification permission granted.");// hitted
             // Initialize MoEngage Web Push
             Moengage.call_web_push();
             generatePushToken();
@@ -174,216 +164,45 @@
       }
     }
 
+    
     window.addEventListener("load", () => {
       initializeMoEngage();
       requestNotificationPermission();
+      
     });
+
+
+    
+    
+    
+    
+    
+    // console.log(Moengage.onsite.getData)
+    // Moengage.onsite.getData(tagName, function (err, data) {
+    //   if (err) {
+    //     // Handle error case here
+    //     // We could get error from various reasons, like network issues, campaigns not present for a particular tag
+    //     return console.error('Error from moengage:', err);
+    //   }
+    //   console.log('Data for campaign:', data);
+    //   var payload = data
+    //     .payload; // Campaign payload defined during campaign creation
+    //   var impTracker = data
+    //     .imp; // Function, you can call impTracker() to send impression
+    //   stats
+     
+    //   var clickTracker = data.click({
+    //     widget_id: "sample_widget_id"
+    //   });
+    // })
+
+    
+
+
+
+
+
   </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- <script type="text/javascript">
-    var moeDataCenter = "dc_2"; // Replace "DC" with the actual Data center value from the above table
-    var moeAppID = "QPRMH0VQMWX3XZM7NU3VC8RD_DEBUG"; // Replace "AppID" available in the settings page of MoEngage Dashboard.
-
-    !function (e, n, i, t, a, r, o, d) { if (!moeDataCenter || !moeDataCenter.match(/^dc_[0-9]+$/gm)) return console.error("Data center has not been passed correctly. Please follow the SDK installation instruction carefully."); var s = e[a] = e[a] || []; if (s.invoked = 0, s.initialised > 0 || s.invoked > 0) return console.error("MoEngage Web SDK initialised multiple times. Please integrate the Web SDK only once!"), !1; e.moengage_object = a; var l = {}, g = function n(i) { return function () { for (var n = arguments.length, t = Array(n), a = 0; a < n; a++)t[a] = arguments[a]; (e.moengage_q = e.moengage_q || []).push({ f: i, a: t }) } }, u = ["track_event", "add_user_attribute", "add_first_name", "add_last_name", "add_email", "add_mobile", "add_user_name", "add_gender", "add_birthday", "destroy_session", "add_unique_user_id", "update_unique_user_id", "moe_events", "call_web_push", "track", "location_type_attribute"], m = { onsite: ["getData", "registerCallback"] }; for (var c in u) l[u[c]] = g(u[c]); for (var v in m) for (var f in m[v]) null == l[v] && (l[v] = {}), l[v][m[v][f]] = g(v + "." + m[v][f]); r = n.createElement(i), o = n.getElementsByTagName("head")[0], r.async = 1, r.src = t, o.appendChild(r), e.moe = e.moe || function () { return (s.invoked = s.invoked + 1, s.invoked > 1) ? (console.error("MoEngage Web SDK initialised multiple times. Please integrate the Web SDK only once!"), !1) : (d = arguments.length <= 0 ? void 0 : arguments[0], l) }, r.addEventListener("load", function () { if (d) return e[a] = e.moe(d), e[a].initialised = e[a].initialised + 1 || 1, !0 }), r.addEventListener("error", function () { return console.error("Moengage Web SDK loading failed."), !1 }) }(window, document, "script", "https://cdn.moengage.com/release/" + moeDataCenter + "/moe_webSdk.min.latest.js", "Moengage");
-
-    Moengage = moe({
-      app_id: moeAppID,
-      debug_logs: 1
-    });
-  </script> -->
-<!-- 
-
-  <script type="text/javascript">
-    var moeDataCenter = "dc_2"; // Replace with the actual Data center value
-    var moeAppID = "QPRMH0VQMWX3XZM7NU3VC8RD_DEBUG"; // Replace with the actual AppID from MoEngage Dashboard
-  
-    (function(e, n, i, t, a, r, o, d) {
-      if (!moeDataCenter || !moeDataCenter.match(/^dc_[0-9]+$/)) {
-        return console.error("Data center has not been passed correctly. Please follow the SDK installation instruction carefully.");
-      }
-      var s = e[a] = e[a] || [];
-      if (s.invoked) {
-        return console.error("MoEngage Web SDK initialised multiple times. Please integrate the Web SDK only once!"), !1;
-      }
-      e.moengage_object = a;
-      var l = {},
-        g = function(n) {
-          return function() {
-            for (var i = arguments.length, t = Array(i), a = 0; a < i; a++) t[a] = arguments[a];
-            (e.moengage_q = e.moengage_q || []).push({
-              f: n,
-              a: t
-            });
-          };
-        },
-        u = ["track_event", "add_user_attribute", "add_first_name", "add_last_name", "add_email", "add_mobile", "add_user_name", "add_gender", "add_birthday", "destroy_session", "add_unique_user_id", "update_unique_user_id", "moe_events", "call_web_push", "track", "location_type_attribute"],
-        m = {
-          onsite: ["getData", "registerCallback"]
-        };
-      for (var c in u) l[u[c]] = g(u[c]);
-      for (var v in m)
-        for (var f in m[v]) null == l[v] && (l[v] = {}), l[v][m[v][f]] = g(v + "." + m[v][f]);
-      r = n.createElement(i), o = n.getElementsByTagName("head")[0], r.async = 1, r.src = t, o.appendChild(r), e.moe = e.moe || function() {
-        return (s.invoked = s.invoked + 1, s.invoked > 1) ? (console.error("MoEngage Web SDK initialised multiple times. Please integrate the Web SDK only once!"), !1) : (d = arguments.length <= 0 ? void 0 : arguments[0], l);
-      };
-      r.addEventListener("load", function() {
-        if (d) return e[a] = e.moe(d), e[a].initialised = e[a].initialised + 1 || 1, !0;
-      });
-      r.addEventListener("error", function() {
-        return console.error("Moengage Web SDK loading failed."), !1;
-      });
-    }(window, document, "script", "https://cdn.moengage.com/release/" + moeDataCenter + "/moe_webSdk.min.latest.js", "Moengage"));
-  
-    Moengage = moe({
-      app_id: moeAppID,
-      debug_logs: 1,
-      enableSPA: true,
-      // Additional Web Push Configuration
-      swPath: 'service-worker.js', // Replace with the correct path to your service worker file
-      serviceWorker: true,
-      enableWebPush: true,
-      pushServiceWorker: 'https://cdn.moengage.com/serviceworker_cdn.min.latest.js',
-      webpush: {
-        defaultNotificationIcon: "https://yourdomain.com/path/to/icon.png", // Replace with the path to your default notification icon
-        defaultNotificationTitle: "Your Website Title", // Replace with your default notification title
-      },
-    });
-  </script> -->
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    console.log("running script")
-    var moeDataCenter = "dc_2"; // Replace "DC" with the actual Data center value from the above table
-    var moeAppID = "QPRMH0VQMWX3XZM7NU3VC8RD_DEBUG"; // Replace "AppID" available in the settings page of MoEngage Dashboard.
-  
-    !(function (e, n, i, t, a, r, o, d) {
-      if (!moeDataCenter || !moeDataCenter.match(/^dc_[0-9]+$/gm))
-        return console.error(
-          "Data center has not been passed correctly. Please follow the SDK installation instruction carefully."
-        );
-      var s = (e[a] = e[a] || []);
-      if (((s.invoked = 0), s.initialised > 0 || s.invoked > 0))
-        return (
-          console.error(
-            "MoEngage Web SDK initialised multiple times. Please integrate the Web SDK only once!"
-          ),
-          !1
-        );
-      e.moengage_object = a;
-      var l = {},
-        g = function n(i) {
-          return function () {
-            for (var n = arguments.length, t = Array(n), a = 0; a < n; a++)
-              t[a] = arguments[a];
-            (e.moengage_q = e.moengage_q || []).push({ f: i, a: t });
-          };
-        },
-        u = [
-          "track_event",
-          "add_user_attribute",
-          "add_first_name",
-          "add_last_name",
-          "add_email",
-          "add_mobile",
-          "add_user_name",
-          "add_gender",
-          "add_birthday",
-          "destroy_session",
-          "add_unique_user_id",
-          "update_unique_user_id",
-          "moe_events",
-          "call_web_push",
-          "track",
-          "location_type_attribute",
-        ],
-        m = { onsite: ["getData", "registerCallback"] };
-      for (var c in u) l[u[c]] = g(u[c]);
-      for (var v in m)
-        for (var f in m[v])
-          null == l[v] && (l[v] = {}), (l[v][m[v][f]] = g(v + "." + m[v][f]));
-      (r = n.createElement(i)),
-        (o = n.getElementsByTagName("head")[0]),
-        (r.async = 1),
-        (r.src = t),
-        o.appendChild(r),
-        (e.moe =
-          e.moe ||
-          function () {
-            return ((s.invoked = s.invoked + 1), s.invoked > 1)
-              ? (console.error(
-                  "MoEngage Web SDK initialised multiple times. Please integrate the Web SDK only once!"
-                ),
-                !1)
-              : ((d = arguments.length <= 0 ? void 0 : arguments[0]), l);
-          }),
-        r.addEventListener("load", function () {
-          if (d)
-            return (
-              (e[a] = e.moe(d)),
-              (e[a].initialised = e[a].initialised + 1 || 1),
-              !0
-            );
-        }),
-        r.addEventListener("error", function () {
-          return console.error("Moengage Web SDK loading failed."), !1;
-        });
-    })(
-      window,
-      document,
-      "script",
-      "https://cdn.moengage.com/release/" +
-        moeDataCenter +
-        "/moe_webSdk.min.latest.js",
-      "Moengage"
-    );
-  
-    function initializeMoEngage() {
-      Moengage = moe({
-        app_id: moeAppID,
-        debug_logs: 1,
-        swPath: "./serviceworker.js",
-        enableSPA: true,
-      });
-    }
-  
-    function requestNotificationPermission() {
-      if ("Notification" in window) {
-        Notification.requestPermission().then((permission) => {
-          if (permission === "granted") {
-            console.log("Notification permission granted.");
-            // Initialize MoEngage Web Push
-            Moengage.call_web_push();
-          } else {
-            console.log("Notification permission denied.");
-          }
-        });
-      }
-    }
-  
-    window.addEventListener('load', () => {
-      initializeMoEngage();
-      requestNotificationPermission();
-    });
-  </script>
-  
 
 
 
@@ -398,70 +217,5 @@
 
 
 
-
-
-
-
-
-<!-- <script type="text/javascript">
-  // Set the MoEngage Data Center and App ID
-  var moeDataCenter = "dc_2"; // Replace "DC" with the actual Data center value from the above table
-    var moeAppID = "QPRMH0VQMWX3XZM7NU3VC8RD_DEBUG"; // Replace "AppID" available in the settings page of MoEngage Dashboard.
-
-  (function(e, n, i, t, a, r, o, d) {
-    // Ensure the Data Center is correctly passed
-    if (!moeDataCenter || !moeDataCenter.match(/^dc_[0-9]+$/)) {
-      return console.error("Data center has not been passed correctly. Please follow the SDK installation instructions carefully.");
-    }
-
-    // Initialize the MoEngage object
-    var s = e[a] = e[a] || [];
-    if (s.invoked) {
-      return console.error("MoEngage Web SDK initialized multiple times. Please integrate the Web SDK only once!");
-    }
-    e.moengage_object = a;
-    var l = {},
-      g = function(n) {
-        return function() {
-          for (var i = arguments.length, t = Array(i), a = 0; a < i; a++) t[a] = arguments[a];
-          (e.moengage_q = e.moengage_q || []).push({
-            f: n,
-            a: t
-          });
-        };
-      },
-      u = ["track_event", "add_user_attribute", "add_first_name", "add_last_name", "add_email", "add_mobile", "add_user_name", "add_gender", "add_birthday", "destroy_session", "add_unique_user_id", "update_unique_user_id", "moe_events", "call_web_push", "track", "location_type_attribute"],
-      m = {
-        onsite: ["getData", "registerCallback"]
-      };
-    for (var c in u) l[u[c]] = g(u[c]);
-    for (var v in m)
-      for (var f in m[v]) null == l[v] && (l[v] = {}), l[v][m[v][f]] = g(v + "." + m[v][f]);
-    r = n.createElement(i), o = n.getElementsByTagName("head")[0], r.async = 1, r.src = t, o.appendChild(r), e.moe = e.moe || function() {
-      return (s.invoked = s.invoked + 1, s.invoked > 1) ? (console.error("MoEngage Web SDK initialized multiple times. Please integrate the Web SDK only once!"), !1) : (d = arguments.length <= 0 ? void 0 : arguments[0], l);
-    };
-    r.addEventListener("load", function() {
-      if (d) return e[a] = e.moe(d), e[a].initialised = e[a].initialised + 1 || 1, !0;
-    });
-    r.addEventListener("error", function() {
-      return console.error("Moengage Web SDK loading failed."), !1;
-    });
-  }(window, document, "script", "https://cdn.moengage.com/release/" + moeDataCenter + "/moe_webSdk.min.latest.js", "Moengage"));
-
-  // Initialize MoEngage
-  Moengage = moe({
-    app_id: moeAppID,
-    debug_logs: 1,
-    enableSPA: true,
-    serviceWorker: true,
-    swPath: './serviceworker.js', // Replace with the correct path to your service worker file
-    pushServiceWorker: 'https://cdn.moengage.com/serviceworker_cdn.min.latest.js',
-    webpush: {
-      defaultNotificationIcon: "https://www.nanostuffs.com/img/nano-logo.png", // Replace with the path to your default notification icon
-      defaultNotificationTitle: "NanoStuffs", // Replace with your default notification title
-    },
-  });
-  Moengage.call_web_push();
-</script> -->
 
 </html>
