@@ -9,7 +9,7 @@ import Services from '../src/Components/Services'
 
 function App() {
 
-  console.log("Navigator::", navigator);
+  console.log("Navigator::", navigator, process.env.PUBLIC_URL);
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
