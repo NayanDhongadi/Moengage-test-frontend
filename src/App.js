@@ -14,7 +14,7 @@ function App() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
 
-      navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/serviceWork/serviceworker.js`)
+      navigator.serviceWorker.register(`serviceworker.js`)
 
         .then((registration) => {
           console.log("process.env.PUBLIC_URL", process.env.PUBLIC_URL);
